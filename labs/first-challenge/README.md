@@ -27,16 +27,8 @@ U sing "[ ]" to end each list and separate each element using " , "
 How to Run
 ----------
 ```
-# On the command line insert "python firstC.py"
+# On the console insert "python firstC.py"
 ```
-
-
-General instructions
---------------------
-1. Don't forget to sync first with the base [master](https://github.com/CodersSquad/ap-labs) branch.
-2. Push your code to your personal fork.
-3. Don't forget to update this `README.md` file with your project's `requirements`, `build` and `how to run` sections.
-4. Have fun and don't forget the next section.
 
 
 How to submit your work
