@@ -12,7 +12,7 @@ This is the first challenge in your Advanced Programming Class.
 Build Requirements
 ------------------
 ```
-# Programming Language -> Python 2.7.16
+# Programming Language -> Python 3.8.5
 ```
 
 
