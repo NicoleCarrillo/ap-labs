@@ -12,22 +12,21 @@ This is the first challenge in your Advanced Programming Class.
 Build Requirements
 ------------------
 ```
-# Programming Language -> Python 3.7.3
+
 ```
 
 
 How to build
 ------------
 ```
-# Where the line is " lt=[1, [1, [1, [1]]],1] " insert the list with the elements you want to test.
-U sing "[ ]" to end each list and separate each element using " , "
+
 ```
 
 
 How to Run
 ----------
 ```
-# On the console insert "python firstC.py"
+
 ```
 
 
