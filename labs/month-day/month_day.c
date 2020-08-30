@@ -3,16 +3,25 @@
 #define NUMBER_OF_STRING 13
 #define MAX_STRING_SIZE 20
 int dias[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+int diasbi[13]={0,31,29,31,30,31,30,31,31,30,31,30,31};
 int meses[13]={0,1,2,3,4,5,6,7,8,9,10,11,12};
 char mesesL[NUMBER_OF_STRING][MAX_STRING_SIZE]={"Ilegal Day","Jan","Feb","Mar","April","May","June","July","Agust","Sep","Oct","Nov","Dec"};
 
-/* month_day function's prototype*/
 void month_day(int year, int yearday, int *pmonth, int *pday){
     int d=*pday;
     int contador=0;
-    if(year==0||yearday>=366||year<=999){
+    if(year==0||yearday>366||year<=999){
         printf("ILegal Date");
-        printf(" ");
+        printf("\n");
+    }else if(((year%4 == 0) && (year%100 != 0)) || (year%400 == 0)){
+        while(yearday>d){
+            yearday=yearday-d;
+            pday=&diasbi[contador];
+            pmonth=&meses[contador];
+            d=*pday;
+            contador++;
+        }
+        printf("%s%s%i%s%i%s\n",mesesL[*pmonth]," ",yearday,",",year," "); 
     }else{
         while(yearday>d){
             yearday=yearday-d;
@@ -20,13 +29,12 @@ void month_day(int year, int yearday, int *pmonth, int *pday){
             pmonth=&meses[contador];
             d=*pday;
             contador++;
-    }
-    if(*pday==0||*pmonth==0){
-        printf("ILegal Date");
-        printf(" ");
-    }else{
-    printf("%s%s%i%s%i%s",mesesL[*pmonth]," ",yearday,",",year," "); 
-    }  
+        }if(*pday==0||*pmonth==0){
+            printf("ILegal Date");
+            printf(" ");
+        }else{
+        printf("%s%s%i%s%i%s\n",mesesL[*pmonth]," ",yearday,",",year," "); 
+        }  
     }
 };
 
