@@ -34,7 +34,7 @@ int mystrfind(char *origin, char *substr){
         while(*origin==*substr){
             origin++,substr++;
             if(*substr=='\0'){
-               printf("%s%s%d%s%s\n","string was found at ","[",pos,"]"," posicion");  
+               printf("%s%s%d%s%s\n"," string was found at ","[",pos,"]"," position");  
                return 0;
             }
         }
