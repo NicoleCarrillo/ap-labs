@@ -68,7 +68,7 @@
 [2019-03-22 21:24] [ALPM-SCRIPTLET] Created symlink /etc/systemd/system/getty.target.wants/getty@tty1.service → /usr/lib/systemd/system/getty@.service.
 [2019-03-22 21:24] [ALPM-SCRIPTLET] Created symlink /etc/systemd/system/multi-user.target.wants/remote-fs.target → /usr/lib/systemd/system/remote-fs.target.
 [2019-03-22 21:24] [ALPM-SCRIPTLET] :: Append 'init=/usr/lib/systemd/systemd' to your kernel command line in your
-[2019-03-22 21:24] [ALPM-SCRIPTLET]    bootloader to replace sysvinit with systemd, or install systemd-sysvcompat
+[2019-03-22 21:24] [ALPM-SCRIPTLET]    boot-loader to replace sysvinit with systemd, or install systemd-sysvcompat
 [2019-03-22 21:24] [ALPM] installed dhcpcd (7.0.8-1)
 [2019-03-22 21:24] [ALPM] installed diffutils (3.7-1)
 [2019-03-22 21:24] [ALPM] installed file (5.36-1)
