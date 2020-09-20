@@ -1,5 +1,6 @@
 package main
- 
+
+import "golang.org/x/tour/pic"
 
 func Pic(dx, dy int) [][]uint8 {
 	pic := make([][]uint8, dy)
@@ -13,5 +14,5 @@ func Pic(dx, dy int) [][]uint8 {
 }
 
 func main() {
-	Pic(100,100);
+	pic.Show(Pic)
 }
