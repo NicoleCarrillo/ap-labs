@@ -37,7 +37,7 @@ int infof(const char *format, ...){
     if(type == 1){
         vprintf (format, arg);
     }else{
-        openlog("logger", LOG_PID | LOG_CONS, LOG_SYSLOG);
+        openlog("logger", LOG_PID, LOG_USER);
         textcolor(BRIGHT, CYAN, BLACK);		
         vsyslog(LOG_INFO, format, arg);
         closelog();
