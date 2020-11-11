@@ -11,7 +11,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 	"os"
 
 	"gopl.io/ch5/links"
@@ -24,28 +23,29 @@ type web struct {
 
 //!+sema   tokens is a counting semaphore used to  enforce a limit of 20 concurrent requests.
 var tokens = make(chan struct{}, 20)
+var con = 0
 
 func crawl(txtfile *os.File, url web) []web {
-	var linksWeb []web //& ARRAY FOR EACH LINK SON SONS
 
 	if url.level > 0 {
 		_, errf := txtfile.WriteString(url.url + "\n") //? WRITE DATA INSIDE FILE
 		if errf != nil {
 			fmt.Println("ERROR IN CRAWL IN FILE")
 		}
-
+		con++
 		tokens <- struct{}{} //* acquire a token
 		list, err := links.Extract(url.url)
-		if err != nil {
-			log.Print(err)
-		}
-		<-tokens //* release the token
-
+		linksWeb := make([]web, 0)
 		for _, n := range list {
 			linksWeb = append(linksWeb, web{url: n, level: url.level - 1})
 		}
-	}
+		<-tokens //* release the token
 
+		if err != nil {
+		}
+		return linksWeb
+	}
+	linksWeb := make([]web, 0) //& ARRAY FOR EACH LINK SON SONS
 	return linksWeb
 }
 
@@ -53,9 +53,11 @@ func crawl(txtfile *os.File, url web) []web {
 
 func main() {
 	worklist := make(chan []web)
-	var n int      //* number of pending sends to worklist
-	n++            //* Start with the command-line arguments.
-	var data []web //^ STORING WEB URLS ARRRAY SEARCH ONES
+	var n int              //* number of pending sends to worklist
+	n++                    //* Start with the command-line arguments.
+	data := make([]web, 0) //^ STORING WEB URLS ARRRAY SEARCH ONES
+
+	seen := make(map[web]bool)
 	if len(os.Args) < 3 {
 		fmt.Printf("YOU ARE MISSING ARGUMENTS! -> ./web-crawler -depth=# -results=FILE.txt URL" + "\n")
 	} else {
@@ -71,22 +73,20 @@ func main() {
 		data = append(data, web{url: os.Args[3], level: *depth}) //^ STORE THE HEAD OF THE "TREE" URL IN MY ARRAY
 
 		go func() { worklist <- data }() //* Crawl the web concurrently.
-		level := 0                       //& VARIABLE FOR CONTROLLING LEVEL OF EACH URL SON
-		seen := make(map[web]bool)
+
 		for ; n > 0; n-- {
 			list := <-worklist
-			if level <= *depth { //TODO CONTROL STRUCTURE FOR THE DEPTH OF EACH URL
-				for _, link := range list {
-					if !seen[link] {
-						seen[link] = true
-						n++
-						go func(link web) {
-							worklist <- crawl(txtfile, link)
-						}(link)
-					}
+			for _, link := range list {
+				if !seen[link] {
+					seen[link] = true
+					n++
+
+					go func(link web) {
+						worklist <- crawl(txtfile, link)
+					}(link)
+
 				}
 			}
-			level++
 		}
 		defer txtfile.Close()
 	}
